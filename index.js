@@ -8,6 +8,32 @@ const count =document.getElementById('count');//Viene del span contador
 const total =document.getElementById('total'); //Viene del span total
 const movieSelect =document.getElementById('movie'); //Viene de la lista desplegable llamada movie
 
+//Es necesario que cuando se actualice se conozca el presupuesto invertido en otras peliculas
+populateUI()
+//Se obtienen datos del local storage para actualizar la pantalla
+function populateUI(){
+    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));//Hace lo contrario del JSON stringify
+
+    //console.log(selectedSeats);
+    if(selectedSeats!==null && selectedSeats>0){
+        seats.forEach((seat, index)=>{
+            if(selectedSeats.indexOf(index)>-1){
+                seat.classList.add('selected')
+            }
+        })
+    }
+    const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
+
+    if(selectedMovieIndex!==null){
+        movieSelect.selectedIndex =selectedMovieIndex;
+    }
+}
+
+
+
+
+
+
 //el operador +al inicio lo convierte en un number
 let ticketPrice = +movieSelect.value; //Cada option dentro de la lista desplegable tiene un value
 
@@ -72,3 +98,7 @@ container.addEventListener('click', (event)=>{
     }
 })
 //Uso de localstorage
+
+
+//count inicial del 
+updateSelectedCount();
